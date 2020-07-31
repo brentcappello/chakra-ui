@@ -9,7 +9,7 @@ export interface ThemeProviderProps {
   theme: Dict
 }
 
-export function ThemeProvider(props: ThemeProviderProps) {
+export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
   const { children, theme } = props
   const outerTheme = React.useContext(ThemeContext) as Dict
   const mergedTheme = merge({}, outerTheme, theme)
@@ -36,7 +36,7 @@ export function useTheme<T extends object = Dict>() {
 
 export type ChakraProviderProps = ThemeProviderProps
 
-export function ChakraProvider(props: ChakraProviderProps) {
+export const ChakraProvider: React.FC<ChakraProviderProps> = (props) => {
   const { theme, children } = props
 
   if (!theme) {
@@ -64,7 +64,7 @@ const [StylesProvider, useStyles] = createContext<Dict<SystemStyleObject>>({
 
 export { StylesProvider, useStyles }
 
-export function GlobalStyle() {
+export const GlobalStyle = () => {
   const { colorMode } = useColorMode()
   return (
     <Global
